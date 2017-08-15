@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style type="text/css">
+#input_area {
+    text-align: center;
+}
+#compare{
+	text-align: center;
+}
+#num_area {
+    margin-top: 50px;
+  	text-align: center;
+  	height: 100px;
+}
+
+button {
+	cursor: pointer;
+	border: 1px solid #eee;
+}
+button:hover {
+	background: #009688;
+	border: 1px solid #eee;
+	color: #fff;
+}
+ul li {
+	display: inline-block;
+    background: #4c92b3;
+	margin-left: 2px;
+	list-style: none;
+	width: 20px;
+}
+ul li:hover {
+	background: #ddd;
+	cursor: pointer;
+}
+</style>
+
+<body>
+    <div id="input_area">
+        <input type="text" id="num_input">
+        <button class="in_left">左侧入</button>
+        <button class="in_right">右侧入</button>
+        <button class="out_left">左侧出</button>
+        <button class="out_right">右侧出</button>
+    </div>
+    <ul id=num_area></ul>
+    <div id="compare">
+    	<button >排列</button>
+	</div>
+
+    <script>
+	    function getName(name) {
+	        return document.querySelector(name);
+	    }
+	    var num_input = getName("#num_input");
+	    var in_left = getName(".in_left");
+	    var in_right = getName(".in_right");
+	    var out_left = getName(".out_left");
+	    var out_right = getName(".out_right");
+	    var num_area = getName("#num_area");
+	    var compare_btn = getName("#compare");
+
+	    function shiftIn(direction) {
+	        if (!num_input.value || (num_input.value < 10) || (num_input.value > 100) || (isNaN(num_input.value))) {
+				alert("请输入10-100的数!");
+				return false;
+	        } else {
+	            var newLi = document.createElement("li");
+	            newLi.style.height = num_input.value + "px";
+	            if (direction == "left") {
+	                num_area.insertBefore(newLi, num_area.firstChild);
+	            } else if (direction == "right") {
+	                num_area.appendChild(newLi);
+	            }
+	        }
+	        for (let i = 0; i < num_area.childNodes.length; i++) {
+	            console.log(num_area.childNodes[i].offsetHeight);
+	        }
+	        console.log(num_area.childNodes)
+	    }
+
+	    function remove(direction) {
+	        if (num_area.childNodes.length <= 0) {
+	            alert("不存在元素可以删除");
+	            return false;
+	        } else {
+	            if (direction == "left") { //点击左侧按钮删除
+	                alert("删除数字：" + num_area.firstChild.innerText + "！");
+	                num_area.removeChild(num_area.firstChild);
+	            } else if (direction == "right") { //点击右侧按钮删除
+	                alert("删除数字：" + num_area.lastChild.innerText + "！");
+	                num_area.removeChild(num_area.lastChild);
+	            } else {
+	                alert("删除数字：" + num_area.removeChild(event.target).innerText + "！");
+	            }
+	        }
+
+	    }
+
+	    function compare() {
+	    	var child = [];
+	    	for(let i=0; i<num_area.childNodes.length; i++){
+	    		child.push(num_area.childNodes[i].offsetHeight);
+	    	}
+	    	
+	        child.sort(function(pre, cur) {
+	            return pre - cur;
+	        })
+
+	        for(let i=0; i<num_area.childNodes.length; i++){
+	    		num_area.childNodes[i].style.height = child[i]+"px";
+	    	}
+	    }
+
+	    compare_btn.onclick = function() {
+	        compare();
+	    }
+
+	    in_left.onclick = function() {
+	        shiftIn("left");
+	    }
+	    in_right.onclick = function() {
+	        shiftIn("right");
+	    }
+	    out_left.onclick = function() {
+	        remove("left");
+	    }
+	    out_right.onclick = function() {
+	        remove("right");
+	    }
+	    num_area.onclick = function() {
+	        remove(event);
+	    }
+	</script>
+</body>
+
+
+</html>
+
