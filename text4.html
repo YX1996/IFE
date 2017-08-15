@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+	#input_area{
+		text-align: center; 
+	}
+	#num_area{
+		margin-top: 50px;
+		text-align: center;
+	}
+	li{
+		display: inline-block;
+		padding: 15px;
+		margin: 10px;
+		background: #f00;
+		color: #fff;
+		font-size: 20px;
+
+	}
+</style>
+<body>
+<div id = "input_area">
+	<div>
+		<input type="text" id="num_input">
+		<button class="in_left">左侧入</button>
+		<button class="in_right">右侧入</button>
+		<button class="out_left">左侧出</button>
+		<button class="out_right">右侧出</button>
+		</div>
+	<ul id=num_area> 
+
+	</ul>
+<script>
+	function getName(name){
+		return document.querySelector(name);
+	}
+	var num_input = getName("#num_input");
+	var in_left = getName(".in_left");
+	var in_right = getName(".in_right");
+	var out_left = getName(".out_left");
+	var out_right = getName(".out_right");
+	var num_area = getName("#num_area");
+
+	function shiftIn(direction){
+		if(num_input.value == ""){
+			alert("请输入！");
+			num_input.focus();
+		}else if(isNaN(num_input.value)){
+			alert("请输入纯数字！");
+			num_input.focus();
+		}else{
+			var newLi = document.createElement("li");
+			newLi.innerHTML = num_input.value;
+			if(direction == "left") {
+				num_area.insertBefore(newLi, num_area.firstChild);
+			}else if(direction == "right") {
+				num_area.appendChild(newLi)
+			}
+		}
+	}
+
+	function remove(direction) {
+        if(num_area.childNodes.length<=0){
+            alert("不存在元素可以删除");
+            return false;
+        } else{
+            if(direction == "left"){  //点击左侧按钮删除
+                alert("删除数字：" + num_area.firstChild.innerText +"！");
+                num_area.removeChild(num_area.firstChild);
+            } else if(direction == "right"){  //点击右侧按钮删除
+                alert("删除数字：" + num_area.lastChild.innerText +"！");
+                num_area.removeChild(num_area.lastChild);
+            } else{
+            	alert("删除数字：" + num_area.removeChild(event.target).innerText +"！");
+            }
+        }
+    }
+	
+	in_left.onclick = function(){
+		shiftIn("left");
+	}
+	in_right.onclick = function(){
+		shiftIn("right");
+	}
+	out_left.onclick = function(){
+		remove("left");
+	}
+	out_right.onclick = function(){
+		remove("right");
+	}
+	num_area.onclick = function(){
+		remove(event);
+	}
+
+</script>
+</body>
+
+</html>
