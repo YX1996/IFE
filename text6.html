@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+div {
+    border: 1px solid #000;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    margin: 10px;
+}
+
+#wrap {
+    height: 400px;
+    width: 800px;
+}
+
+.layer_1 {
+    height: 360px;
+    width: 390px;
+}
+
+.layer_2 {
+    height: 320px;
+    width: 135px;
+}
+
+.layer_3 {
+    height: 280px;
+    width: 50px;
+}
+</style>
+
+<body>
+    <div id="wrap">
+        <div class="layer_1">
+            <div class="layer_2">
+                <div class="layer_3"></div>
+                <div class="layer_3"></div>
+            </div>
+            <div class="layer_2">
+                <div class="layer_3"></div>
+                <div class="layer_3"></div>
+            </div>
+        </div>
+        <div class="layer_1">
+            <div class="layer_2">
+                <div class="layer_3"></div>
+                <div class="layer_3"></div>
+            </div>
+            <div class="layer_2">
+                <div class="layer_3"></div>
+                <div class="layer_3"></div>
+            </div>
+        </div>
+    </div>
+    <button id="preorder_btn">前序</button>
+    <button id="infixorder_btn">中序</button>
+    <button id="postorder_btn">后序</button>
+    <script>
+    var layer_1 = document.querySelectorAll(".layer_1");
+    var layer_2 = document.querySelectorAll(".layer_2");
+    var layer_3 = document.querySelectorAll(".layer_3");
+
+    var wrap = document.querySelector("#wrap");
+    var preorder_btn = document.querySelector("#preorder_btn");
+    var infixorder_btn = document.querySelector("#infixorder_btn");
+    var postorder_btn = document.querySelector("#postorder_btn");
+    var timer = 0;
+
+    function showNode(node) {
+
+        node.style.backgroundColor = "#fff";
+        setTimeout(function() {
+            node.style.backgroundColor = "#ff524a";
+        }, timer += 500);
+        setTimeout(function() {
+            node.style.backgroundColor = "#ffffff";
+        }, timer += 500);
+
+    }
+
+    //先序遍历
+    function preOrder(root) {
+        if (root) {
+            showNode(root);
+            preOrder(root.children[0]);
+            preOrder(root.children[1]);
+        }
+    }
+
+    //使用递归方式实现中序遍历
+    function inOrder(root) {
+        if (root) {
+            preOrder(root.children[0]);
+            showNode(root);
+            preOrder(root.children[1]);
+        }
+    }
+
+    //后序遍历
+    function postOrder(root) {
+        if (root) {
+            preOrder(root.children[0]);
+            preOrder(root.children[1]);
+            showNode(root);
+        }
+    }
+
+    //为按钮绑定点击事件
+    preorder_btn.addEventListener("click", function() {
+        preOrder(wrap);
+        timer = 0;
+        
+    }, false);
+
+    infixorder_btn.addEventListener("click", function() {
+        inOrder(wrap);
+        timer = 0;
+        reset();
+    }, false);
+
+    postorder_btn.addEventListener("click", function() {
+        postOrder(wrap);
+        timer = 0;
+        reset();
+    }, false);
+    </script>
+</body>
+
+</html>
