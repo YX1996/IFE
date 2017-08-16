@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	div{
+		width: 600px;
+		margin: 50px auto;
+	}
+	#isStu label{
+		padding: 0 100px;
+	}
+	span{
+		display: inline-block;
+		width: 100px;
+		margin-right: 20px;
+		text-align: right;
+	}
+	#college select{
+		height: 25px;
+	}
+	#college select:nth-child(2){
+		width: 150px;
+		margin-right: 50px;
+	}
+	#college select:nth-child(3){
+		width: 200px;
+	}
+	#company input{
+		height: 25px;
+		width: 400px;
+	}
+	#company{
+		display: none;
+	}
+</style>
+<body>
+<form action="">
+	<div id="isStu">
+		<label><input type="radio" name="myname" id="stu" checked>在校生</label>
+		<label><input type="radio" name="myname" id="wor">非在校生</label>
+	</div>
+	<div id="college">
+		<span>学校</span>
+		<select name="city" id="city">
+			<option value="">北京</option>
+			<option value="">上海</option>
+			<option value="">南京</option>
+			<option value="">杭州</option>
+		</select>
+
+		<select name="school" id="school">
+			<option value="">北京大学</option>
+		</select>
+	</div>
+	<div id="company">
+		<label for=""><span>就业单位</span><input type="text"></label>
+	</div>	
+</form>
+	<script>
+		var stu = document.querySelector("#stu");
+		var wor = document.querySelector("#wor");
+		var city = document.querySelector("#city");
+		var school = document.querySelector("#school");
+		var college = document.querySelector("#college");
+		var company = document.querySelector("#company");
+
+		function changeRadio(){
+			if (wor.checked) {
+				college.style.display = "none";
+				company.style.display = "block";
+			}else{			
+				college.style.display = "block";
+				company.style.display = "none";
+			}
+		}
+
+		var list = [
+			["北京大学","清华大学","中国人民大学"],
+			["复旦大学","上海交通大学","同济大学"],
+			["南京大学","南京航空大学","南京理工大学"],
+			["浙江大学","杭州电子科技大学","浙江师范大学"]
+		]
+		function changeSchool(){
+			console.log(city.selectedIndex);
+			var str = "";
+			var arr = list[city.selectedIndex];
+			for(let i=0; i<arr.length; i++) {
+				str += "<option>" + arr[i] + "</option>";
+			}
+			school.innerHTML = str;
+		}
+		wor.addEventListener("change",changeRadio,false);
+		stu.addEventListener("change",changeRadio,false);
+
+		city.addEventListener("change",changeSchool,false);
+
+
+
+	</script>
+</body>
+</html>
