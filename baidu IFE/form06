@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	*{
+		padding: 0;
+		margin: 0;
+	}
+	#container {  
+		border: 1px solid #000;
+		width: 40%;
+		height: 40%;
+		position: fixed;
+		margin: auto;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		display: none;
+		background: red;
+		z-index: 99;
+	}  
+	#head{
+		background: #666;
+		height: 20%;
+	}
+	p{
+		padding: 10px;
+	}
+	#main{
+		height: 80%;
+		background: #ddd;
+		position: relative;
+		
+	}
+	button{
+		display: inline-block;
+		padding: 5px;
+		margin: 5px;
+	}
+	#btnGroup{
+		position: absolute;
+		bottom: 5px;
+		right: 5px;
+	}
+	#block{
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		background-color: #cccccc;
+		opacity: 0.5;
+		z-index: 2;
+		display: none;
+	}
+</style>
+<body style="height: 10000px">
+	<button id="btn">点我</button>
+	<div id="container">
+		<div id="head"><p>这是一个浮出层</div>
+		<div id="main">
+			<p>这是一个浮出层</p>
+			<div id="btnGroup">
+				<button id="yes">确定</button>
+				<button id="no">取消</button>
+			</div>
+		</div>
+	</div>
+	<div id="block"></div>
+	<script>
+		var no = document.querySelector("#no");
+		var yes = document.querySelector("#yes");
+		var btn = document.querySelector("#btn");
+		var con = document.querySelector("#container");
+		var block = document.querySelector("#block");
+
+		btn.onclick=function(){
+			con.style.display="block";
+			block.style.display="block";
+		}
+		no.onclick=function(){
+			con.style.display="none";
+			block.style.display="none";
+		}
+		yes.onclick=function(){
+			con.style.display="none";
+			block.style.display="none";
+		}
+		
+	</script>
+</body>
+</html>
