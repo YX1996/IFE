@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	*{
+		border-collapse: collapse;
+		text-align: center;
+	}
+	table{
+		margin: 0 auto;
+	}
+	thead td{
+		background: #3c3c3c;
+		color: #fff;
+	}
+	td{
+		border: 1px solid grey;
+		height: 40px;
+		width: 120px;
+	}
+	.upbtn{
+		display: inline-block;
+		height: 0;
+		width: 0;
+		border-bottom: 10px solid #fff;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		position: relative;
+		top: -8px;
+		left: 16px;
+		cursor: pointer;
+		
+	}
+	.downbtn{
+		display: inline-block;
+		height: 0;
+		width: 0;
+		border-top: 10px solid #fff;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		position: relative;
+		top: 8px;
+		left: -4px;
+		cursor: pointer;
+	}
+</style>
+<body>
+	<table id="tab">
+<!-- 		<thead>
+			<tr>
+				<td>姓名</td>
+				<td>语文<span class="upbtn"></span><span class="downbtn"></span></td>
+				<td>数学<span class="upbtn"></span><span class="downbtn"></span></td>
+				<td>英语<span class="upbtn"></span><span class="downbtn"></span></td>
+				<td>总分<span class="upbtn"></span><span class="downbtn"></span></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>小明</td>
+				<td>50</td>
+				<td>70</td>
+				<td>80</td>
+				<td>200</td>
+			</tr>
+			<tr>
+				<td>小红</td>
+				<td>80</td>
+				<td>100</td>
+				<td>90</td>
+				<td>270</td>
+			</tr>
+			<tr>
+				<td>小丽</td>
+				<td>70</td>
+				<td>80</td>
+				<td>100</td>
+				<td>250</td>
+			</tr>
+		</tbody> -->
+	</table>
+	<script>
+		
+		var tabHeader = {
+		        heads: [{
+		            name: 'name',
+		            label: '姓名',
+		            sortable: false
+		        }, {
+		            name: 'chinese',
+		            label: '语文',
+		            sortable: true
+		        }, {
+		            name: 'math',
+		            label: '数学',
+		            sortable: true
+		        }, {
+		            name: 'english',
+		            label: '英语',
+		            sortable: true
+		        }, {
+		            name: 'total',
+		            label: '总分',
+		            sortable: true
+		        }]
+		    };
+		    
+		var data = [
+			{
+				"name": "小明",
+				"chinese": 50,
+				"math": 70,
+				"english": 80,
+				"total": 200
+			},
+			{
+				"name": "小红",
+				"chinese": 80,
+				"math": 100,
+				"english": 90,
+				"total": 270
+			},
+			{
+				"name": "小丽",
+				"chinese": 70,
+				"math": 80,
+				"english": 100,
+				"total": 250
+			},
+			{
+				"name": "小亮",
+				"chinese": 60,
+				"math": 90,
+				"english": 70,
+				"total": 220
+			},
+			{
+				"name": "大宝",
+				"chinese": 90,
+				"math": 80,
+				"english": 80,
+				"total": 250
+			},	
+			{
+				"name": "铁柱",
+				"chinese": 90,
+				"math": 60,
+				"english": 90,
+				"total": 240
+			}		
+
+		]
+		var tab = document.querySelector("#tab");
+		var tabHead = tabHeader.heads;
+		var tabHeadLen = tabHeader.heads.length;
+		var dataLen = data.length;
+
+		function init(){
+			addThead();
+			addTbody();
+		}
+
+		//生成单元行
+		function addtr(){
+			var trNode = document.createElement("tr");
+			return trNode
+		}
+		//生成单元格
+		function addtd(value){
+			var tdNode = document.createElement("td");
+			tdNode.innerText = value;
+			return tdNode;
+		}
+		//升序排列
+		function upsort(val){
+			data.sort(function(a,b){
+				return a[val] - b[val];
+			})
+			tab.innerHTML = "";
+			init();
+		}
+		//降序排列
+		function downsort(val){
+			data.sort(function(a,b){
+				return b[val] - a[val];
+			})
+			tab.innerHTML = "";
+			init();
+		}
+		//插入表头
+		function addThead(){
+			var tHead = document.createElement('thead');
+			var trNode =addtr();
+
+			tabHead.forEach(function(head){
+				var tds = addtd(head.label);
+				if (head.sortable) {
+					var val = head.name;
+					var upbtn = document.createElement("span");
+					upbtn.className = "upbtn";
+					tds.appendChild(upbtn);
+					upbtn.onclick = function(){
+						upsort(val);
+					}
+
+					var downbtn = document.createElement("span");
+					downbtn.className = "downbtn";
+					tds.appendChild(downbtn);
+					downbtn.onclick = function(){
+						downsort(val);
+					}
+
+				}	
+				trNode.appendChild(tds);		
+			})
+			tHead.appendChild(trNode);
+			tab.appendChild(tHead);
+		}
+		//添加表格内容
+		function addTbody(){
+			var tbody = document.createElement("tbody");
+			for(let i=0; i<dataLen; i++) {
+				var trNode = addtr();
+				for(var key in data[i]) {
+					var tds = addtd(data[i][key]);
+					trNode.appendChild(tds);
+				}
+				tbody.appendChild(trNode);
+			}
+			tab.appendChild(tbody);
+		}
+
+		init();
+	</script>
+
+</body>
+</html>
