@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    #wrap {
+        -webkit-perspective: 1200px;
+        width: 1200px;
+        margin: 0 auto;
+    }
+
+    .img {
+        height: 200px;
+        width: 300px;
+        border: 1px solid #000;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        
+    }
+
+    #container {
+        margin: 0 auto;
+        height: 600px;
+        width: 1200px;
+        transform-style: preserve-3d;
+        animation: romo 20s infinite;
+        position: relative;
+    }
+
+    @keyframes romo {
+
+        0% {
+            transform: rotateY(0deg);
+        }
+        12.5% {
+            transform: rotateY(0deg);
+        }
+        16.7% {
+            transform: rotateY(-60deg);
+        }
+        29.2% {
+            transform: rotateY(-60deg);
+        }
+        33.4% {
+            transform: rotateY(-120deg);
+        }
+        45.9% {
+            transform: rotateY(-120deg);
+        }
+        50.1% {
+            transform: rotateY(-180deg);
+        }
+        62.6% {
+            transform: rotateY(-180deg);
+        }
+        66.8% {
+            transform: rotateY(-240deg);
+        }
+        79.3% {
+            transform: rotateY(-240deg);
+        }
+        83.5% {
+            transform: rotateY(-300deg);
+        }
+        96% {
+            transform: rotateY(-300deg);
+        }
+        100% {
+            transform: rotateY(-360deg);
+        }
+    }
+
+    .img01 {
+        transform: rotateY(0deg) translateZ(800px);
+        background: url(img/图片34.jpg);
+        background-size: cover;
+    }
+
+    .img02 {
+        transform: rotateY(60deg) translateZ(800px);
+        background: url(img/图片35.jpg);
+        background-size: cover;
+    }
+
+    .img03 {
+        transform: rotateY(120deg) translateZ(800px);
+        background: url(img/图片36.jpg);
+        background-size: 100% 100%;
+    }
+
+    .img04 {
+        transform: rotateY(180deg) translateZ(800px);
+        background: url(img/图片37.jpg);
+        background-size: cover;
+    }
+
+    .img05 {
+        transform: rotateY(240deg) translateZ(800px);
+        background: url(img/图片38.jpg);
+        background-size: cover;
+    }
+
+    .img06 {
+        transform: rotateY(300deg) translateZ(800px);
+        background: url(img/图片39.jpg);
+        background-size: cover;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div id="container">
+            <div class="img img01"></div>
+            <div class="img img02"></div>
+            <div class="img img03"></div>
+            <div class="img img04"></div>
+            <div class="img img05"></div>
+            <div class="img img06"></div>
+        </div>
+    </div>
+</body>
+
+</html>
