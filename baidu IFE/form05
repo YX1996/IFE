@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	*{
+		padding: 0;
+		margin: 0;
+		box-sizing: border-box;
+	}
+	table{
+		border-collapse: collapse;
+		text-align: center;
+		display: inline-block;
+
+	}
+	#wrap{
+		width: 563px;
+		margin: 0 auto;
+		border-size
+	}
+	td{
+		height: 50px;
+		width: 50px;
+	}
+	#table_main tbody td{
+		border: 1px solid rgba(0,0,0,0.2);
+	}
+
+	#table_main tbody{
+		border: 2px solid #000;
+	}
+
+	#control{
+		margin: 10px 0 0 52px;
+	}
+	#table_main {
+		position: relative;
+	}
+	#movebox{
+		width: 50px;
+		height: 50px;
+		transform: rotate(0deg);
+		position: absolute;	
+		transition: all 1s;
+	}
+	#blue{
+		height: 30%;	
+		background: blue;
+	}
+	#red{
+		height: 70%;
+		background: red;
+		
+	}
+</style>
+<body>
+	<div id="wrap">
+		<table id="table_left">
+			<thead>
+				<tr>
+					<td>1</td>
+				</tr>
+				<tr>
+					<td>2</td>
+				</tr>
+				<tr>
+					<td>3</td>
+				</tr>
+				<tr>
+					<td>4</td>
+				</tr>
+				<tr>
+					<td>5</td>
+				</tr>
+				<tr>
+					<td>6</td>
+				</tr>
+				<tr>
+					<td>7</td>
+				</tr>
+				<tr>
+					<td>8</td>
+				</tr>
+				<tr>
+					<td>9</td>
+				</tr>
+				<tr>
+					<td>10</td>
+				</tr>
+			</thead>
+		</table
+		><table id="table_main">
+			<thead>
+				<tr>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+					<td>10</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<div id="movebox" style="top: 350px;left: 150px;">
+							<div id="blue"></div>
+							<div id="red"></div>
+						</div>
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				
+			</tbody>
+		</table>
+		<div id="control">
+			<input type="text">
+			<button>执行</button>
+			<p style="font-size: 12px;margin-top: 10px;">TRA TOP / TRA RIG / TUN BOT / TUN LET/ MOV TOP / MOV RIG / MOV BOT / MOV LET
+		</div>
+	</div>
+	<script>
+	var mbox = document.querySelector("#movebox");
+	var dir = document.querySelector("input");
+	var btn = document.querySelector("button");
+	var direction = 0;
+
+	function changeDir(direction){
+
+		switch(direction){
+			case "top":
+				mbox.style.transform = "rotate(0deg)";
+				move(0);
+				break;
+			case "right":
+				mbox.style.transform = "rotate(90deg)";
+				move(1);
+				break;
+			case "bottom":
+				mbox.style.transform = "rotate(180deg)";
+				move(2);
+				break;
+			case "left":
+				mbox.style.transform = "rotate(270deg)";
+				move(3);
+				break;	
+		}
+
+	}
+	function move(direction){	
+		var top = mbox.style.top.match(/\d/g).join("")/1;
+		var left = mbox.style.left.match(/\d/g).join("")/1;	
+		switch(direction) {
+			case 0: //up
+				if (top == 50) {
+					top = 50;
+				}else{
+					top -= 50;
+				}
+				break;
+			case 1 : //向右
+				if (left == 450) {
+					left = 450;
+				}else{
+					left += 50;
+				}
+				break;
+			case 2 ://向下
+				if (top==450) {
+					top = 500;
+				}else{
+					top += 50;
+				}
+				break;
+			case 3://向左
+				if (left == 0) {
+					left = 0;
+				}else{
+					left -= 50;
+				}
+			    break;
+		}
+		mbox.style.top = ""+ top +"px";
+		mbox.style.left = "" + left + "px";
+	}
+
+	function go(){
+		switch(dir.value){
+			case 'TRA LEF':
+				move(3);
+				break;
+			case 'TRA TOP':
+				move(0);
+				break;
+			case 'TRA RIG':
+				move(1);
+				break;
+			case 'TRA BAC':
+				move(2);
+				break;
+			case 'MOV LEF':
+				changeDir("left");
+				break;	
+			case 'MOV RIG':
+				changeDir("right");
+				break;	
+			case 'MOV TOP':
+				changeDir("top");
+				break;	
+			case 'MOV BOT':
+				changeDir("bottom");
+				break;		
+		}	
+	}
+
+	btn.addEventListener('click',go);
+	</script>
+		
+</body>
+</html>
