@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	div{
+		margin: 50px;
+		height: 30px;
+	}
+	p{
+		margin-left: 50px;
+		font-size: 14px;
+
+	}
+	label{
+		margin-right: 5px;
+	}
+	#user {
+		margin-left: 10px; 
+		height: 20px;
+		border: 1px solid #9e9e9e;
+		border-radius: 5px;
+	}
+</style>
+<body>
+<div>
+	<label>名称 <input type="text" id="user"></label>
+	<input type="submit" value="验证" id="btn">
+	<p id="warn">必填，长度为4~16个字符</p>
+</div>
+
+<script>
+	var user = document.querySelector("#user");
+	var warn = document.querySelector("#warn");
+	var btn = document.querySelector("#btn");
+
+	btn.onclick = function() {
+		console.log(user.value);
+		var sum = 0;
+		for(var i=0; i<user.value.length; i++) {
+			var codeval;
+			codeval = user.value.charCodeAt(i);
+			if(codeval>=0x00 && codeval<=0xFF) {
+				sum += 1;
+			} else {
+				sum += 2;
+			}
+		}
+		if(sum>3 && sum<17) {
+			warn.style.color = "green";
+			warn.innerHTML = "格式正确";
+		} else {
+			warn.style.color = "red";
+			user.style.borderColor = "red";
+			warn.innerHTML = "格式错误,请输入4~16位字符数";
+		}
+			
+	}
+	
+</script>
+</body>
+</html>
