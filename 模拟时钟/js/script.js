@@ -86,4 +86,5 @@ function draw(){
     var val = document.querySelectorAll("input");
     if (val[0].value === time.getHours() && val[1].value === time.getMinutes()) {
     	alert("到时间了");
+	}
 }
